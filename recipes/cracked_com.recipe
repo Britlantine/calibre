@@ -24,7 +24,8 @@ class Cracked(BasicNewsRecipe):
     }
 
     keep_only_tags = [dict(name='article', attrs={'class': 'module article dropShadowBottomCurved'}),
-                        dict(name='article', attrs={'class': 'module blog dropShadowBottomCurved'})]
+                        dict(name='article', attrs={'class': 'module blog dropShadowBottomCurved'}),
+                        dict(name='div', attrs={'class': 'content-content'})]
 
     remove_tags = [
         dict(name='section', attrs={'class': ['socialTools', 'quickFixModule']}),
@@ -45,7 +46,8 @@ class Cracked(BasicNewsRecipe):
         if not first_fetch:
             for h1 in soup.findAll('h1'):
                 h1.extract()
+            for title in soup.findAll('title'):
+                title.extract()    
             for div in soup.findAll(attrs={'class':'meta'}):
                 div.extract()
         return soup
-
